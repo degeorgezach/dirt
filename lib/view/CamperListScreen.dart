@@ -25,7 +25,7 @@ class _CamperListScreenState extends State<CamperListScreen> {
       join(await getDatabasesPath(), 'campers_database.db'),
       onCreate: (db, version) {
         return db.execute(
-          'CREATE TABLE campers(id INTEGER PRIMARY KEY, firstName TEXT, birthday DATETIME)',
+          'CREATE TABLE campers(id INTEGER PRIMARY KEY, firstName TEXT, birthday TEXT)',
         );
       },
       version: 1,
@@ -105,7 +105,7 @@ class _CamperListScreenState extends State<CamperListScreen> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text('First Name: ${campers[index].firstName}'),
-                  Text('Date of Birth: ${campers[index].birthday.toString()}'),
+                  Text('Date of Birth: ${campers[index].birthday}'),
                 ],
               ),
             ),

@@ -30,14 +30,6 @@ class _AddCamperScreenState extends State<AddCamperScreen> {
     if (pickedFile != null) {
       // Convert the picked image to File type
       _imageFile = File(pickedFile.path);
-
-      // Optionally, you can resize the image using the 'image' package
-      img.Image? image = img.decodeImage(_imageFile!.readAsBytesSync());
-      //img.Image resizedImage = img.copyResize(image!, width: 100);
-
-      // Save the resized image back to File
-      //_imageFile =
-      //    File.fromRawPath(Uint8List.fromList(img.encodePng(resizedImage)));
     }
 
     setState(() {});
@@ -60,7 +52,7 @@ class _AddCamperScreenState extends State<AddCamperScreen> {
             icon: Icon(Icons.check),
             onPressed: () {
               final DateFormat formatter = DateFormat('yyyy-MM-dd');
-              final String formatted = formatter.format(DateTime.now());
+              final String formatted = formatter.format(DateTime.parse(_birthdayController.text));
 
               widget.onAdd(
                 Camper(
@@ -73,7 +65,7 @@ class _AddCamperScreenState extends State<AddCamperScreen> {
           ),
         ],
       ),
-      body: Padding(
+      body: SingleChildScrollView(
         padding: EdgeInsets.all(16.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -93,11 +85,14 @@ class _AddCamperScreenState extends State<AddCamperScreen> {
               ),
               onTap: () => _selectDate(context),
             ),
+            SizedBox(height: 16.0),
             _imageFile != null
-                ? Image.file(_imageFile!, width: 100, height: 100)
-                : Placeholder(
-              fallbackHeight: 20,
-              fallbackWidth: 20,
+                ? Image.file(_imageFile!, width: 200, height: 200)
+                : Image.asset(
+              'assets/prof.png',
+              width: 200.0, // Adjust the width as needed
+              height: 200.0, // Adjust the height as needed
+              fit: BoxFit.contain, // Adjust the fit as needed
             ),
             SizedBox(height: 20),
             ElevatedButton(
